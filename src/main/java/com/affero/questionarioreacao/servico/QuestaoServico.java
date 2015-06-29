@@ -31,4 +31,10 @@ public class QuestaoServico {
     public void save(Questao questao) {
         repositorio.save(questao);
     }
+    
+    
+    public Double CalculaMedia(Double nota, Double total){
+        Double media = nota / total;
+        return media;
+    }
 }
