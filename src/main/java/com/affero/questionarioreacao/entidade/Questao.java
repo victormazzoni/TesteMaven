@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Questao implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +34,7 @@ public class Questao implements Serializable {
     public void setObrigatorio(Boolean obrigatorio) {
         this.obrigatorio = obrigatorio;
     }
-    
+
     @OneToMany(mappedBy = "questao")
     private List<Resposta> respostas;
 
@@ -83,7 +84,7 @@ public class Questao implements Serializable {
 
     @Override
     public String toString() {
-        return "com.affero.questionarioreacao.entidade.Questao[ id=" + id + " ]";
+        return "[ id=" + id + ", nome=" + nome + ", obrigatorio=" + obrigatorio + ", respostas=" + respostas + " ]";
     }
-    
+
 }

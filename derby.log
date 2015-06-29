@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Mon Jun 29 11:11:35 BRT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-014e-3fa8-a9a9-0000006e66b0 
-on database directory memory:C:\Netbeans Proj\Cópia de TesteMaven\TesteMaven\testdb with class loader sun.misc.Launcher$AppClassLoader@1d16e93 
+Mon Jun 29 15:11:42 BRT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-014e-4084-7fbc-000000e5fa00 
+on database directory memory:C:\Netbeans Proj\TesteMaven\TesteMaven\testdb with class loader sun.misc.Launcher$AppClassLoader@1d16e93 
 Loaded from file:/C:/Documents%20and%20Settings/VMWG/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_20-b26
-user.dir=C:\Netbeans Proj\Cópia de TesteMaven\TesteMaven
+user.dir=C:\Netbeans Proj\TesteMaven\TesteMaven
 os.name=Windows XP
 os.arch=x86
 os.version=5.1
