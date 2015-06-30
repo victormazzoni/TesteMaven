@@ -10,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -29,6 +27,8 @@ public class Resposta implements Serializable {
     private String idCurso;
     private Integer questao;
     private Double resposta;
+    
+    public Resposta(){}
     
     public Resposta(String idCurso, Integer idQuestao, Double resposta){
         this.idCurso = idCurso;

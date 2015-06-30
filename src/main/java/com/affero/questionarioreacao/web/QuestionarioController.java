@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.affero.questionarioreacao.entidade.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,12 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 public class QuestionarioController {
     private final QuestaoServico servico;
     private final RespostaServico servicoRes;
+    private final AvaliacaoServico servicoAva;
     public String curso;
    
     @Autowired
-    public QuestionarioController(QuestaoServico servico, RespostaServico servicoRes) {
+    public QuestionarioController(QuestaoServico servico, RespostaServico servicoRes, AvaliacaoServico servicoAva) {
         this.servico = servico;
         this.servicoRes = servicoRes;
+        this.servicoAva = servicoAva;
     }
     
     @RequestMapping(value="/{curso}", method = RequestMethod.GET)
@@ -31,7 +33,7 @@ public class QuestionarioController {
         for(Questao q:servico.getQuestoes()){
             Integer id = q.getId();
             String compl = new String();
-            System.out.println(q);
+            
             if (id<=3){
                 compl = "<select name='Nota"+ id +"' required>\n" +
                             "<option value=''>--Selecione--</option>\n" +
@@ -73,7 +75,7 @@ public class QuestionarioController {
     @RequestMapping(value="/reacao", method = RequestMethod.POST)
     public void doPost(HttpServletRequest request,
         HttpServletResponse response) throws ServletException, IOException {
-            
+
         Double Total = 10.0;
         Double Avaliacao = 45.0;
        
@@ -96,23 +98,53 @@ public class QuestionarioController {
             }else{
                 nota = "Não avaliado.";
             }
-            
             servicoRes.save(new Resposta(curso,id,n0));
-            for(Resposta r:servicoRes.getRespostas()){
-                System.out.println(r);
-            }
-            
+                     
             htmlParcial += "<p><b>" + pergunta + ": </b>";
-            htmlParcial += nota + "</p><br/>";
+            //htmlParcial += nota + "</p><br/>";
             htmlParcial += "<h2>Avaliacao " + Avaliacao + "<br/>"; 
             //Avaliacao = Nota + Avaliacao;
             htmlParcial += "<h2>Avaliacao " + Avaliacao + "<br/>"; 
             Double mediaPer = servico.CalculaMedia(Avaliacao, Total);
             htmlParcial += "Media " + mediaPer + "</h2>";
         }
+        
         htmlParcial += "</div>";
         htmlParcial += "</body></html>";
-         
+        
+        Integer idQuestaoPrev = 0;
+        Double SomaTotal = 0.0;
+        Double TotalRespostas = 0.0;
+        Double Media = 0.0;
+            
+        for(Resposta r:servicoRes.getRespostas()){
+            Integer idQuestao = r.getQuestao();
+            
+            if (idQuestao!=idQuestaoPrev){
+                Media = 0.0;
+                TotalRespostas = 0.0;
+                SomaTotal = r.getResposta();
+                TotalRespostas++;
+                Media = SomaTotal/TotalRespostas;
+                System.out.println("Questao:" + idQuestao);
+                System.out.println("Soma:" + SomaTotal);
+                System.out.println("Total:" + TotalRespostas);
+                System.out.println("Media:" + Media + "\n");
+                idQuestaoPrev = idQuestao;
+                
+            }else{
+                SomaTotal = SomaTotal + r.getResposta();
+                TotalRespostas++;
+                Media = SomaTotal/TotalRespostas;
+                System.out.println("Questao:" + idQuestao);
+                System.out.println("Soma:" + SomaTotal);
+                System.out.println("Total:" + TotalRespostas);
+                System.out.println("Media:" + Media + "\n");
+            }  
+System.out.println(r);
+        }
+        
+
         writer.println(htmlParcial);
          
     }

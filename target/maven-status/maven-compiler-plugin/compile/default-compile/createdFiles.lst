@@ -1,9 +1,14 @@
+com\affero\questionarioreacao\entidade\Avaliacao_.class
 com\affero\questionarioreacao\repositorio\QuestaoRepositorio.class
-com\affero\questionarioreacao\web\QuestionarioController.class
 com\affero\questionarioreacao\Application.class
-com\affero\questionarioreacao\entidade\Curso.class
+com\affero\questionarioreacao\repositorio\AvaliacaoRepositorio.class
+com\affero\questionarioreacao\entidade\Resposta_.class
+com\affero\questionarioreacao\entidade\Questao_.class
+com\affero\questionarioreacao\servico\AvaliacaoServico.class
+com\affero\questionarioreacao\web\QuestionarioController.class
 com\affero\questionarioreacao\entidade\Resposta.class
 com\affero\questionarioreacao\servico\RespostaServico.class
+com\affero\questionarioreacao\entidade\Avaliacao.class
 com\affero\questionarioreacao\servico\QuestaoServico.class
 com\affero\questionarioreacao\entidade\Questao.class
 com\affero\questionarioreacao\repositorio\RespostaRepositorio.class
