@@ -75,9 +75,11 @@ public class QuestionarioController {
     @RequestMapping(value="/reacao", method = RequestMethod.POST)
     public void doPost(HttpServletRequest request,
         HttpServletResponse response) throws ServletException, IOException {
-
-        Double Total = 10.0;
-        Double Avaliacao = 45.0;
+        
+        Integer idQuestaoPrev = 0;
+        Double SomaTotal = 0.0;
+        Double TotalRespostas = 0.0;
+        Double media = 0.0;
        
         PrintWriter writer = response.getWriter();
           
@@ -99,50 +101,45 @@ public class QuestionarioController {
                 nota = "Não avaliado.";
             }
             servicoRes.save(new Resposta(curso,id,n0));
-                     
-            htmlParcial += "<p><b>" + pergunta + ": </b>";
-            //htmlParcial += nota + "</p><br/>";
-            htmlParcial += "<h2>Avaliacao " + Avaliacao + "<br/>"; 
-            //Avaliacao = Nota + Avaliacao;
-            htmlParcial += "<h2>Avaliacao " + Avaliacao + "<br/>"; 
-            Double mediaPer = servico.CalculaMedia(Avaliacao, Total);
-            htmlParcial += "Media " + mediaPer + "</h2>";
+            
+            for(Resposta r:servicoRes.getRespostas()){
+                Integer idQuestao = r.getQuestao();
+
+                if (idQuestao!=idQuestaoPrev){
+                    TotalRespostas = 0.0;
+                    SomaTotal = r.getResposta();
+                    TotalRespostas++;
+                    media = SomaTotal/TotalRespostas;
+                    /*System.out.println(r);
+                    System.out.println("Questao:" + idQuestao);
+                    System.out.println("Soma:" + SomaTotal);
+                    System.out.println("Total:" + TotalRespostas);
+                    System.out.println("Media:" + media + "\n");*/
+                    idQuestaoPrev = idQuestao;
+
+                }else{
+                    SomaTotal = SomaTotal + r.getResposta();
+                    TotalRespostas++;
+                    media = SomaTotal/TotalRespostas;
+                    /*System.out.println(r);
+                    System.out.println("Questao:" + idQuestao);
+                    System.out.println("Soma:" + SomaTotal);
+                    System.out.println("Total:" + TotalRespostas);
+                    System.out.println("Media:" + media + "\n");*/
+                }  
+
+            }
+            if (id<5){
+                htmlParcial += "<p><b>" + pergunta + ": </b>";
+                htmlParcial +=  media + "</p>";
+            }
+            
+            
         }
-        
+ 
         htmlParcial += "</div>";
         htmlParcial += "</body></html>";
         
-        Integer idQuestaoPrev = 0;
-        Double SomaTotal = 0.0;
-        Double TotalRespostas = 0.0;
-        Double Media = 0.0;
-            
-        for(Resposta r:servicoRes.getRespostas()){
-            Integer idQuestao = r.getQuestao();
-            
-            if (idQuestao!=idQuestaoPrev){
-                Media = 0.0;
-                TotalRespostas = 0.0;
-                SomaTotal = r.getResposta();
-                TotalRespostas++;
-                Media = SomaTotal/TotalRespostas;
-                System.out.println("Questao:" + idQuestao);
-                System.out.println("Soma:" + SomaTotal);
-                System.out.println("Total:" + TotalRespostas);
-                System.out.println("Media:" + Media + "\n");
-                idQuestaoPrev = idQuestao;
-                
-            }else{
-                SomaTotal = SomaTotal + r.getResposta();
-                TotalRespostas++;
-                Media = SomaTotal/TotalRespostas;
-                System.out.println("Questao:" + idQuestao);
-                System.out.println("Soma:" + SomaTotal);
-                System.out.println("Total:" + TotalRespostas);
-                System.out.println("Media:" + Media + "\n");
-            }  
-System.out.println(r);
-        }
         
 
         writer.println(htmlParcial);
