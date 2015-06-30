@@ -3,5 +3,7 @@ com\affero\questionarioreacao\web\QuestionarioController.class
 com\affero\questionarioreacao\Application.class
 com\affero\questionarioreacao\entidade\Curso.class
 com\affero\questionarioreacao\entidade\Resposta.class
+com\affero\questionarioreacao\servico\RespostaServico.class
 com\affero\questionarioreacao\servico\QuestaoServico.class
 com\affero\questionarioreacao\entidade\Questao.class
+com\affero\questionarioreacao\repositorio\RespostaRepositorio.class

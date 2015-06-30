@@ -26,39 +26,38 @@ public class Resposta implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     
-    @ManyToOne
-    @JoinColumn(name = "idCurso")
-    private Curso curso;
-    @ManyToOne
-    @JoinColumn(name = "idQuestaos")
-    private Questao questao;
+    private String idCurso;
+    private Integer questao;
+    private Double resposta;
     
-    private Integer Resposta;
-
-    public Curso getCurso() {
-        return curso;
+    public Resposta(String idCurso, Integer idQuestao, Double resposta){
+        this.idCurso = idCurso;
+        this.questao = idQuestao;
+        this.resposta = resposta;
+    }
+    
+    public String getCurso() {
+        return idCurso;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setCurso(String curso) {
+        this.idCurso = curso;
     }
 
-    public Questao getQuestao() {
+    public Integer getQuestao() {
         return questao;
     }
 
-    public void setQuestao(Questao questao) {
+    public void setQuestao(Integer questao) {
         this.questao = questao;
     }
 
-    
-    
-    public Integer getResposta() {
-        return Resposta;
+    public Double getResposta() {
+        return resposta;
     }
 
-    public void setResposta(Integer Resposta) {
-        this.Resposta = Resposta;
+    public void setResposta(Double Resposta) {
+        this.resposta = Resposta;
     }
 
     public Integer getId() {
@@ -91,7 +90,7 @@ public class Resposta implements Serializable {
 
     @Override
     public String toString() {
-        return "com.affero.questionarioreacao.entidade.Resposta[ id=" + id + " ]";
+        return "[ id=" + id + ", idCurso=" + idCurso + ", questao=" + questao + ", resposta=" + resposta + " ]";
     }
     
 }
